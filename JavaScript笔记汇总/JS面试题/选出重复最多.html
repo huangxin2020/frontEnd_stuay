@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 输出一组数字/字符串 中重复出现频率最高的数字/字符
+        // 数字
+        // var arr = [1,2,4,5,343,5,4,5,3,4,24,6,4,3,1,4];
+        var str = 'aaaddddded';
+        var num = {};
+
+        for(var i = 0 ; i < str.length ; i++){
+            var n = str[i];
+            if(num[n]){
+                num[n]++;
+            }else{
+                num[n] = 1;
+            }
+        } 
+        var obj;
+        for(var porp in num){
+            if(!obj || obj.qe < num[porp]){
+                obj = {
+                    number : porp,
+                    qe  : num[porp]
+                }
+            }
+        }
+        console.log(`出现最多的字符是${obj.number},出现的次数是${obj.qe}`);
+    </script>
+</body>
+
+</html>

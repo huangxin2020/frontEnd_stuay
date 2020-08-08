@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>js的继承方法</title>
+</head>
+
+<body>
+  <script>
+    // 借助构造函数实现继承
+    function Parent1() {
+      this.name = 'Parent1';
+    }
+    function Child1() {
+      Parent1.call(this);
+      this.type = 'Child1';
+    }
+    // 缺点：Parent1原型上的属性不能被继承
+    console.log(new Child1)
+    console.log(new Child2)
+
+    // 利用原型链来实现继承
+    function Parent2() {
+      this.name = 'Parent2';
+      this.play = [1, 2, 3];
+    }
+    function Child2() {
+      this.type = 'Child2';
+    }
+    Child2.prototype = new Parent2();
+    let child1 = new Child2();
+    let child2 = new Child2();
+    child1.play.push(4)
+    console.log(child1.play, child2.play)
+    // 缺点：当我们实例了两个对象后，修改了一个对象原型上的属性 另一个也会改变
+
+    // 组合方式 - 在写面向对象语句时常用的方法
+    function Parent3() {
+      this.name = 'Parent3';
+      this.play = [1, 2, 3];
+    }
+    function Child3() {
+      Parent3.call(this);
+      this.type = 'Child3';
+    }
+    Child3.prototype = new Parent3()
+    let child3 = new Child3();
+    let child4 = new Child3();
+    child3.play.push(4)
+    console.log(child3.play, child4.play)
+
+    // 组合方式的优化写法1
+    function Parent4() {
+      this.name = 'Parent4';
+      this.play = [1, 2, 3];
+    }
+    function Child4() {
+      Parent4.call(this);
+      this.type = 'Child4';
+    }
+    Child4.prototype = Parent4.portotype
+    let child5 = new Child4();
+    let child6 = new Child4();
+    child3.play.push(4)
+    console.log(child5, child6)
+    // 缺点 因为Parent与Child公用了原型对象，导致无法使用constructor指定出正确的构造函数
+    console.log(child5.constructor); // Parent4
+
+    // 组合方式的优化写法2
+    function Parent5() {
+      this.name = 'Parent5';
+      this.play = [1, 2, 3];
+    }
+    function Child5() {
+      Parent5.call(this);
+      this.type = 'Child5';
+    }
+    Child5.prototype = Object.create(Parent5.prototype);
+    Child5.prototype.constructor = Child5;
+    let child7 = new Child5();
+    let child8 = new Child5();
+    child3.play.push(4)
+    console.log(child7, child8)
+    // 缺点 因为Parent与Child公用了原型对象，导致无法使用constructor指定出正确的构造函数
+    console.log(child7.constructor); // Parent4
+  </script>
+</body>
+
+</html>

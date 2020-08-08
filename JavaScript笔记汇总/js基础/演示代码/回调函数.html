@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>回调函数作业</title>
+    <script src="./js/betterfunction.js"></script>
+</head>
+
+<body>
+    <script>
+        // 写一个函数，为数组排序 (ps: 要考虑到这个数组的所有可能性 如这个数组每一项是对象啊，或者字符串等)
+        // 需要再写一个函数判断传入参数的大小
+        // 判断规则 commp函数返回的值为正数 则表示 a > b
+        //  为0 则表示 a == b
+        //  为负数，则表示 a < b
+        /* function sort(arr ,commp) {
+            for (var i = 0; i < arr.length; i++) {
+                for (var j = 0; j < arr.length - i; j++) {
+                    if (commp(arr[j] , arr[j + 1]) > 0) {
+                        var mep = arr[j + 1];
+                        arr[j + 1] = arr[j];
+                        arr[j] = mep;
+                    }
+                }
+            }
+        } */
+        // 默认如果传入的对象一个人的信息 则按照年龄来排序
+        // 如果传入的字符串那么则按照字符串的长度来排序
+        /* function commp (a,b){
+            if(typeof a === 'object'){
+                return a.age - b.age;
+            }else if(typeof a === 'string'){
+                return a.length - b.length;
+            }
+
+        }
+        var arr = ['adsadf','23rwf','ewfewferwgergerg','dwqdwqd'];
+        sort(arr,commp);
+        console.log(arr); */
+        // 写一个函数，按照指定的条件对某个数组进行筛选 函数名filter 比如从一个数组中筛选出所有奇数
+
+        function filter (arr , condition){
+            for(var i = 0 ; i < arr.length ; i++){
+                if(condition(arr[i])){
+                    newArr.push(arr[i]);
+                }
+            }
+            return newArr;
+        }
+
+        function condition(a){
+            return a % 2 !== 0 ;
+        }
+        var newArr = [];
+        var arr = [213,4354,66,32,34,234,55];
+        filter(arr,condition);
+        console.log(newArr);
+        // 写一个函数，安按照指定的条件，得到某个数组中的第一个满足条件的元素 函数名find
+
+        // 写一个函数，按照指定的条件，得到某个数组中满足条件的元素 函数名count
+    </script>
+</body>
+
+</html>

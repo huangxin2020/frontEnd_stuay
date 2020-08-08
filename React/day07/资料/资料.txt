@@ -1,0 +1,9 @@
+Tab栏插件
+https://github.com/happypancake/react-native-tab-navigator
+Tab栏使用方式
+http://www.jianshu.com/p/7a4899bde137
+
+图标插件
+https://github.com/oblador/react-native-vector-icons
+图标插件使用方式
+http://www.jianshu.com/p/2317d8fa3202?from=groupmessage

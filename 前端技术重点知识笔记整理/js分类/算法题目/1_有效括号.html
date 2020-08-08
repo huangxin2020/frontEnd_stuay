@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>判断括号是否是有效</title>
+</head>
+<body>
+  <script>
+      // 给定一个只含 括号的字符串 '()' 判断是否效
+      //  例如 '(())' - true    '(()(' - false
+
+    // 利用栈 - 因为使用栈 所以在空间复杂度上为 O(n)
+    let str = '((())';
+    function  isValid(str) {
+       // 1. 利用数组模拟栈结构
+       let stack = [];
+       // 循环字符串进行判断
+       for(let i = 0; i < str.length; i++) {
+         let n = str[i];
+         // 对获取的字符串进行判断 因为只要坚持括号，所以当检测到左括号时 入栈
+         if (n === '(') {
+           stack.push(n)
+         } else {
+           if (stack.length === 0 ) {
+             return false
+           }else {
+             stack.pop();
+           }
+         }
+       }
+       return stack.length === 0 ? true : false;
+    }
+
+    // 对上述代码进行优化 空间复杂度是因为使用了栈结构来进行字符判断而产生的
+    // 优化的方式 使用变量来代替栈结构
+    function isValid1 (str) {
+      let sum = 0; // 替代栈来记录"("
+      for (let i = 0 ; i < str.length; i++) {
+        let n = str[i];
+        if (n === '(') {
+          sum ++;
+        } else {
+          if (sum === 0) {
+            return false
+          } else {
+            sum --;
+          }
+        }
+      }
+      return sum === 0 ? true : false;
+    }
+    // console.log(isValid(str));
+    console.log(isValid1(str));
+  </script>
+</body>
+</html>

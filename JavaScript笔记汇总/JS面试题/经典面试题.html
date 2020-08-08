@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 阿里巴巴面试题
+        let a = {
+            n : 1
+        };
+        let b = a;
+        // 连等赋值是让每一个变量都与值关联
+        // 相当于 a.x = {n:2}
+        //        a = {n : 2}
+        // 先左边
+        a.x = a = {
+            n : 2
+        };
+
+        console.log(a.x);
+        console.log(b);
+
+        // 腾讯面试题1
+        var a1 = 'abc' + 123 + 456;
+        var b1 = '456' - '123';
+        var c1 = 100 + true + 21.2 + null + undefined + 'Tencent' + [] + null + 9 + false;
+
+        console.log(a1,b1,c1);
+
+        // 腾讯面试题2
+        /* var str = 'abc123';
+        var num = parseInt(str);
+        if(num == NaN){
+            alert(NaN);
+        } else if(num == 123){
+            alert(123);
+        }else{
+            alert('str');
+        } */
+
+        // 腾讯面试题3
+        
+    </script>
+</body>
+</html>

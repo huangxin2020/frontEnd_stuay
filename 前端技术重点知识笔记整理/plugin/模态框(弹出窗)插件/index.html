@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>打开了一个提醒弹窗</button>
+    <script src="confirm.js"></script>
+    <script>
+        // 配置弹窗 和 事件
+        document.querySelector('button').onclick = function(){
+            // 弹出一个提醒对话框
+            myPlugin.openConfirm({
+                title : '删除提示',
+                content : '请问是否真的要删除',
+                onconfirm : function(){
+                    console.log('点击了确定');
+                },
+                oncancel : function(){
+                    console.log('点击了取消');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

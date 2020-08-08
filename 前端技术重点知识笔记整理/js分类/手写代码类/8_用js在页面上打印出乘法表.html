@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在页面上打印出9*9乘法表</title>
+  <style>
+    span {
+        display: inline-block;
+        width: 70px;
+        border: 1px solid purple;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+  <script>
+    for (let i = 1; i <= 9; i++) {
+        for (let j = 1; j <= i; j++) {
+            document.write('<span>')
+            document.write(i + 'x' + j + '=' + i * j + '\t')
+            document.write('</span>')
+        }
+
+        document.writeln('<br />')
+    }
+  </script>
+</body>
+</html>

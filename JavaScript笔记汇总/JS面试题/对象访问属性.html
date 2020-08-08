@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var ages = 20;
+        var name = 10;
+        var obj = {
+            name : '好好学习',
+            age : ages
+        };
+
+        console.log(obj.name);
+        console.log(obj['name']);
+        // 按照变量name = 10去访问对象
+        // 不加引号表示访问变量
+        // 变量也可以作为属性值
+        console.log(obj[name]); //undefined
+        console.log(obj.age); // 20
+    </script>
+</body>
+</html>

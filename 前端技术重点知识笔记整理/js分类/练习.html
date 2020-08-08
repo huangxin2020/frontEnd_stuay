@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>练习js中的自己封装的函数</title>
+    <style>
+        #outer{
+            width: 100px;
+            height: 100px;
+
+            padding: 20px;
+            border: 5px solid #008c8c;
+        }
+    </style>
+</head>
+<body>
+    <div id="outer"></div>
+
+    <script>
+        // 获取元素的CSS样式
+        let getCss = function getCss(curElem,atter){
+            if(!("getComputedStyle" in window)){
+                throw new SyntaxError('您当前的浏览器版本过低！');
+            }
+            let vale = window.getComputedStyle(curElem,null)[atter];
+
+            let reg = /^(-)?\d+(\.\d+)?(px|rem|pt|em)?$/i;
+
+            reg.test(vale) ? vale = parseFloat(vale) : snull;
+
+            return vale;
+        }
+
+        // console.log(getCss(outer,'padding'));
+        // console.log(window.getComputedStyle(outer,null).width);
+
+
+        // 给元素设置CSS样式
+        /* 
+        js中给元素设置样式的方法   常用的有两种 1. 给元素添加样式名(需要提前写好样式)
+                                             2. 在元素的行间添加样式
+        */
+        // 给元素的某一个具体样式设置属性值
+        let setCss = function setCss(curElem,atter,value){
+            /*
+            细节处理 在IE6~8中 透明度这个样式不是opacity而是filter
+            */
+            if(atter === 'opacity'){
+                curElem.style.opacity = value;
+                curElem.style.fliter = `alpha(opacity=${value*100})`;
+                return;
+            }
+
+            // 希望传入的是数字，函数帮助它添加单位(注意不是所有的属性都需要添加单位 传入的值不能带单位)
+            if(!isNaN(value)){
+                let reg = /^(width|height|fontSize|left|bottom|right|top|((margin|padding)?(top|left|bottom|right)?))$/i;
+                reg.test(atter) ? value += 'px' : null;
+            }
+
+            // 在元素行间添加样式
+            curElem['style'][atter] = value;
+        }
+        // setCss(outer,'width',300);
+
+        // 给元素批量设置css样式
+        let setGroupCss = function(curElem,options = {}){
+            // 遍历传递的options，有多少键值对，就循环多少次，每一次都调取一次setCss方法
+            for(let attr in options){
+                if(!options.hasOwnProperty(attr)) break;
+
+                setCss(curElem,attr,options[attr]);
+            }
+        }
+        setGroupCss(outer,{
+            width: 300,
+            height: 300,
+            padding: 30,
+            'border-color': 'red'
+        })
+
+    </script>
+</body>
+</html>

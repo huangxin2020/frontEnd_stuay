@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>防抖函数的实现</title>
+</head>
+<body>
+  <button>登录提交</button>
+  <script>
+      // 防抖函数的作用 - 防止用户的重复点击 浪费服务器资源 - 发起多次请求
+      function  success() {
+        console.log('登录成功！')
+      }
+      // 防抖函数
+      const bebounce = function (fn, delay) {
+        let timer = null;
+        return (...args) => { // 结构使得回调函数可以传入参数
+          clearTimeout(timer); // 防止多次点击 只执行最后一次
+          timer = setTimeout( () => {
+            fn.apply(this, args); // 保存this的指向
+          }, delay);
+        }
+      };
+      const  login = bebounce(success, 2000);
+
+      let btn = document.querySelector('button');
+      btn.addEventListener('click', login);
+  </script>
+</body>
+</html>

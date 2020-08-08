@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>axios中的ajax应用</title>
+</head>
+<body>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+    // 实际项目中我们都是异步与服务器交互
+    //=>回调地狱 回调函数调用
+    /*$.ajax({
+        url: 'https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/list',
+        success: result => {
+            $.ajax({
+                url: 'https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/info',
+                success: result => {
+                    $.ajax({
+                        url: 'https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/add',
+                        method:'POST',
+                        success: result => {
+
+                        }
+                    });
+                }
+            });
+        }
+    });*/
+
+    //=>发布订阅 - 不是原生的方法需要构建
+    /*let $plan = $.Callbacks(),
+        $planB = $.Callbacks();
+    $.ajax({
+        url: 'https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/list',
+        success: result => {
+            $plan.fire(result);
+        }
+    });
+
+    $plan.add(result => {
+        $.ajax({
+            url: 'https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/list',
+            success: result => {
+                $planB.fire(result);
+            }
+        });
+    });
+
+    $planB.add(result => {
+
+    });*/
+
+    //=>Promise 最推荐的方法 - 管理异步操作解决回调地狱的问题
+    
+    let queryA = function queryA() {
+        return new Promise(resolve => {
+            $.ajax({
+                url: 'https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/list',
+                success: resolve
+            });
+        });
+    };
+
+    let queryB = function queryB() {
+        return new Promise(resolve => {
+            $.ajax({
+                url: 'https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/info',
+                success: resolve
+            });
+        });
+    };
+
+    let queryC = function queryC() {
+        return new Promise(resolve => {
+            $.ajax({
+                url: 'https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/add',
+                method: 'POST',
+                success: resolve
+            });
+        });
+    };
+
+    let promise = queryA(); // 这一步就已经创建了一个promise实例
+    promise.then(result => {
+        console.log('A', result);
+        return queryB();
+/* 上一个THEN中函数手动返回一个新的PROMISE实例(管控了一个异步操作)，
+下一个THEN会等上一个THEN中的异步成功后在执行 */
+/* 加‘return’表示当写这个then中的代码执行结束后，才会执行后面的then的方法 */
+    }).then(result => {
+        console.log('B', result);
+        return queryC();
+    }).then(result => {
+        console.log('C', result);
+    });
+</script>
+<script src="js/promise.js"></script>
+</body>
+</html>

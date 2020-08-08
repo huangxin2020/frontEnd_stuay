@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // js输出的几种常见的方式 都不是ES标准
+        // 在页面上输出
+        // document.write('lalal');
+        // 在页面上弹出框输出
+        // alert("lalala");
+        // 控制台输出
+        // console.log("lalala");
+
+        // js输入的方式 都不是ES标准
+        // 在页面上弹出框输入
+        // prompt('请输入你的年龄！');
+
+
+        // 字符的输出方式 `` - 模板字符串-可以换行 
+        // 其他单引号与双引号换行都要使用 \n  
+        /* console.log(`xixi
+
+        xixi`); */
+
+        /* var colors = new Array();
+        var count = colors.push('red','green');
+        alert(count);
+        alert(colors); */
+
+        /* var obj = {
+            name : 'xiaoming',
+            age : 18,
+            gander : "man"
+        }
+
+        for(var i in obj){
+            console.log(i);
+        } */
+
+        /* let obj = {
+            1 : 122,
+            "abc" : 'ABC'
+        }
+        console.log(obj[1]);
+        console.log(obj['abc']); */
+        /* var n = 0;
+        for(var i = 0 ; i < 10 ; i++){
+            n++;
+            if(i >= 2){
+                i += 2
+                continue;
+            }
+            if(i >= 6){
+                i--;
+                break;
+            }
+
+            i++;
+            console.log(i);
+        }
+        console.log(i);
+        console.log(n); */
+
+        /* let arr = [1,2,3,4,5,6,7,8];
+        let arr1 = arr.slice(-3,-6);
+        console.log(arr,arr1); */
+        /* let arr = [1, -4, -64, 34, 56, 78];
+        arr.sort((a, b) => {
+            return a - b;
+        });
+        console.log(arr); */
+
+        /* let arr = [1, 2, 3, 5];
+        let arr1 = [7, 8, 9];
+
+        let arr2 = arr.concat(arr1); // [1,2,3,5,7,8,9]
+
+        let arr3 = arr1.concat('数组：'); // ['数组：',7,8,9]
+
+        let arr4 = arr.concat(arr1, arr2);
+
+        console.log(arr3); */
+
+        /* function User(name, age, sex) {
+            return {
+                name,
+                age,
+                sex,
+            }
+        }
+
+        var user1 = new User('A', 15, 'man');
+        console.log(user1);
+
+        for(var i in user1){
+            console.log(i);
+        } */
+
+        /* var arr = [1,2,3,4,5,6,7,8,9,10];
+        console.log(arr.reverse()); */
+
+        /* var i = 1;
+        console.log(1 + ++i);
+        i = 1;
+        console.log(1 + i++); */
+
+        /* var fullName = 'language';
+        var obj = {
+            fullName = 'javascript',
+            prop: {
+                getFullName: function () {
+                    return this.fullName;
+                }
+            }
+        }
+        console.log(obj.prop.getFullName());
+        var test = obj.prop.getFullName;
+        console.log(test()) */
+
+        /*         var name = 'window';
+                var Tom = {
+                    name: "Tom",
+                    show: function () {
+                        console.log(this.name);
+                    },
+                    wait: function () {
+                        var fun = this.show;
+                        fun();
+                    }
+                };
+                Tom.wait(); */
+        function Foo() {
+            getName = function () {
+                console.log(1);
+            };
+            return this;
+        }
+        Foo.getName = function () {
+            console.log(2);
+        };
+        Foo.prototype.getName = function () {
+            console.log(3);
+        };
+        var getName = function () {
+            console.log(4);
+        };
+        function getName() {
+            console.log(5);
+        }
+
+        Foo.getName();
+        getName();
+        Foo().getName();
+        getName();
+        new Foo.getName();
+        new Foo().getName();
+        new new Foo().getName();
+    </script>
+</body>
+
+</html>

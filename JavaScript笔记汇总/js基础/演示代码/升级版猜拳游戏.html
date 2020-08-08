@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>升级版猜拳游戏</title>
+</head>
+
+<body>
+    <script>
+        console.log("开始游戏")
+        var round = 1,// 游戏轮次
+            pcScore = 0, // 电脑分数
+            playScore = 0; // 玩家分数
+
+        while (true) {
+            // 第一轮游戏
+            console.log(`==========第${round}轮游戏==========`);
+            console.log(`电脑得分：${pcScore}，玩家得分：${playScore}`);
+
+            var feat = prompt("请输入剪刀、石头、布");
+            if (feat === null) {
+                // 点击取消后
+                break;
+            }
+            if (feat !== '剪刀' && feat !== '石头' && feat !== '布') {
+                console.log("出拳无效，请重新出拳！");
+                continue;
+            }
+            // 让计算机随机出拳
+            var pcfeat,
+                mathPcFeat;
+            mathPcFeat = Math.random();
+            if (mathPcFeat < 0.333) {
+                pcfeat = '剪刀';
+            } else if (mathPcFeat < 0.666) {
+                pcfeat = '石头';
+            } else {
+                pcfeat = '布';
+            }
+
+            // 判断胜负
+            console.log(`你的出拳为${feat}, 计算机的出拳为${pcfeat}`);
+            if (feat === '剪刀' && pcfeat === '布' ||
+                feat === '石头' && pcfeat === '剪刀' ||
+                feat === '布' && pcfeat === '石头') {
+                playScore++;
+                console.log('恭喜你，胜利了！');
+            } else if (feat === pcfeat) {
+                console.log('平局！');
+            } else {
+                pcScore++;
+                console.log('很遗憾，计算机胜利！');
+            }
+            round++;
+        }
+    </script>
+</body>
+
+</html>

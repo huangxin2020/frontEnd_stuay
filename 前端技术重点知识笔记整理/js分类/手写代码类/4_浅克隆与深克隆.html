@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>浅克隆与深克隆</title>
+</head>
+<body>
+  <script>
+    let obj = {
+      name : '小明',
+      age : 18,
+      add : {
+        city : '北京'
+      },
+      Date : new Date(),
+      RegExp : /^d+$/
+    }
+
+    // 浅克隆 - 引用值为同一地址 修改一个的引用值另一对象的引用值也会改变
+    function clone(obj) {
+      // 不直接创建一个新对象的目的 使得新创建的对象与原对象属于同一个所属类
+      let newObj = new obj.constructor;
+      for(let key in obj) {
+        if (!obj.hasOwnProperty(key)) break;
+        newObj[key] = obj[key];
+      }
+
+      return newObj
+    }
+    // let obj1 = clone(obj)
+    // 使用ES6的展开运算符也能实现浅克隆
+    let obj1 = { ...obj }
+
+    // ======================================================
+    // 深克隆 - 完全克隆
+    function deepClone (obj) {
+      // 对对象的属性进行判断
+      if (obj === 'null') return null;
+      if (typeof(obj) !== 'object') return obj;
+      if(obj instanceof RegExp) {
+        return new RegExp(obj);
+      }
+      if (obj instanceof Date) {
+        return new Date(obj);
+      }
+      let newObj = new obj.constructor;
+      for(let key in obj ) {
+        if (obj.hasOwnProperty(key)) {
+          newObj[key] = deepClone(obj[key]);
+        }
+      }
+
+      return newObj;
+    }
+
+    let obj2 = deepClone(obj);
+    // 深度克隆的其他方法 -> 当克隆的对象中没有undefined、函数、symbol、时间对象、正则的时候卡可以使用json来实现
+    let obj3 = {
+      name : "小红",
+      age : 20,
+      add : {
+        city : '南京'
+      }
+    } 
+    let obj4 = JSON.parse(JSON.stringify(obj3));
+
+    // =========与上面的内容无关===========
+    // 2 4 1 1 2 3 3
+    // 微任务先于宏任务执行
+    // 'script start' 'async1 start' 'async2' 'promise1' 'script end' 'async1 end' 'promise2' 'setTimeout'
+  </script>
+</body>
+</html>

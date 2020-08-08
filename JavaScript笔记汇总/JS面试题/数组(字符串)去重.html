@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组/字符 基本类型值去重</title>
+</head>
+
+<body>
+    <script src="../js基础/js/betterfunction.js"></script>
+    <script>
+        let arr = [1, 2, 4, 3, 1, 2, 3, 4, 3, 2, 3, 4, 8];
+        // 去除数组中的重复项
+        // 方案一 ：创建一个新的数组 对要判断的数组进行循环 判断当前这一项在新数组中是否存在 不存在则添加到新数组中
+        /*  let newArr = [];
+         for(let i = 0 ; i < arr.length; i++){
+             let item = arr[i];
+             if(newArr.includes(item)){
+                 continue;
+             }
+             newArr.push(item);
+         } */
+        // 方案一的代码优化 - 利用forEach() 原理与之前的方法一致
+        /* let newArr = [];
+        arr.forEach(item => {
+            if(newArr.includes(item)) return;
+            newArr.push(item);
+        }); */
+        // console.log(newArr);
+        // 上面方法的缺点 - IE6~8都不支持
+
+        // 方案二 不创建新的数组 在原数组上去重 
+        // 思想：循环从第一项开始，与第一项之后的每一项进行比较 相等则删除掉
+        /* for(var i = 0 ; i < arr.length ; i++){
+            var item = arr[i];
+            for(var j = i + 1 ; j < arr.length ; j++){
+                var itemBacks = arr[j];
+                if(item === itemBacks){
+                    // 相等删除
+                    arr.splice(j,1);
+                    // 数组塌陷：j后面的每一项索引都提前了一位，而下一次要比较的应该是j这个索引的内容
+                    j--;
+                }
+            }
+        }
+        console.log(arr); */
+
+        // 方案三 利用对象
+        // var obj = {};
+        /* for(var i = 0 ; i < arr.length ; i++){
+            var item = arr[i];
+            if(obj[item]){
+                obj[item]++;
+            }else{
+                obj[item] = 1;
+            }
+        }
+        var newArr = [];
+        // for in 变量对象的数字属性名时会按照升序顺序来编历
+        for(var prop in obj){
+            newArr.push(Number(prop)); 
+        }
+        console.log(newArr); */
+
+        // 方案三的另一种写法 相对于上面的那些性能最优
+        /* for (var i = 0 ; i < arr.length; i++){
+            let item = arr[i];
+            // 判断在对象中是否存在
+            if(obj[item] !== undefined ){
+                arr.splice(i,1);
+                // 解决数组塌陷
+                i--;
+                continue;
+            }
+            obj[item] = item;
+        }
+        console.log(arr); */
+
+        // 基于splice实现删除性能不好: 当前项被删除后，后面的每一项的索引都会向前提一位，如果后面的内容过多，一定影响性能
+        // 性能相对最优
+        /* for (var i = 0; i < arr.length; i++) {
+            let item = arr[i];
+            if (obj[item] !== undefined) {
+                // 用最后一项与要删除的项互换 删除最后一项
+                arr[item] = arr[arr.length - 1];
+                arr.length--;
+                i--;
+                continue;
+            }
+            obj[item] = item;
+        }
+        console.log(arr); */
+
+        // 使用封裝的去重函数
+        // console.log(myfunction.unique(arr));
+
+        // 利用正则
+        // arr.sort((a , b) => {
+        //     return a- b;
+        // });
+        // let str = arr.join('@') + '@';
+        // let reg = /(\d+@)\1*/g;
+        // arr = [];
+        // str.replace(reg, (n,m) => {
+        //     m = Number(m.slice(0,m.length - 1));
+        //     arr.push(m);
+        // });
+
+        // 利用ES6 里的Set(对应的Map) 实现去重 Set方法自带去重效果
+        var ary = [...new Set(arr)];
+        console.log(ary);
+
+        /* let arr = [1, 1, 2, 2, 4, 5, 2, 3, 5, 5, 1];
+        function fn(arr) {
+            let obj = {};
+            for (let i = 0; i < arr.length; i++) {
+                let item = arr[i];
+                if (obj.hasOwnProperty(item)) {
+                    arr[i] = arr[arr.length - 1];
+                    arr.length--;
+                    i--;
+                }
+                obj[item] = item;
+            }
+            return arr;
+        }
+
+        console.log(fn(arr)); */
+
+    </script>
+</body>
+
+</html>

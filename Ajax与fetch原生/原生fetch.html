@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原生fetch方法</title>
+</head>
+<body>
+  <script>
+    // fetch就是一个promise方法
+    fetch(url).then(res => {
+      return(res.json())
+    }).then( console.log(myjson) )
+  </script>
+</body>
+</html>

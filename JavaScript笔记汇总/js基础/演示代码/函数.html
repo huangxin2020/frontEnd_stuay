@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数</title>
+    <script src="./js/betterfunction.js"></script>
+</head>
+<body>
+    <script>
+        // 判断一个数是不是素数的函数
+        /* function isPrime(n){
+            if( n === 1){
+                return false;
+            }
+            for(var i = 2 ; i < n ; i++){
+                if(n % i === 0){
+                    return false;
+                }
+            }
+            return true;
+        } */
+        // 累加1到100中的素数
+        /* var sum = 0,
+            cut ;
+        for (var i = 1 ; i < 100 ; i++){
+            for(var j = 2 ; j < i ; j++){
+                if(i%j === 0){
+                    cut++;
+                }
+            }
+            if(cut === 0){
+                sum += i;
+            }
+            cut = 0;
+        }
+        console.log(sum); */
+        // 使用函数求和
+        /* var num = 0;
+        for(var i = 0 ; i < 100 ; i++){
+            if(isPrime(i)){
+                num += i;
+            }
+        }
+        console.log(num); */
+
+        // 文档注释
+        /**
+         * nums: 一个数字数组
+        */
+        // var nums = [22,33,56,78,129];
+
+        // 在最大值与最小值之间随机生成一个整数
+        // console.log(myfunction.getRandom(-6,-2));
+
+        // 输入一个字符串输出出现频率最高的那个字符与出现的次数
+
+        // console.log(myfunction.getTopFrequency("asasdsafewewfewgewgw"));
+
+        // 传入一个字符串 去掉单词中间的空格，然后变成大驼峰式命名
+
+        // console.log(myfunction.bigCamel("big camel xi xi"));
+
+        // 大驼峰式命名法函数
+        function bigcaml(str){
+            var result = '';
+            var empties = ' \t\r\n';
+            for(var i = 0 ; i < str.length ; i++){
+                if(!empties.includes(str[i])){
+                    if(empties.includes(str[i - 1]) || i === 0){
+                        result += str[i].toUpperCase();
+                    }else{
+                        result += str[i];
+                    }
+                }
+            }
+            console.log(result);
+        }
+        
+        // bigcaml('hello javscript and world');
+
+        // console.log(myfunction.getRandomString(9));
+
+        // 将字符串按照字符编码的顺序重新开始升序排序
+        var str = 'adnjgtfluuufrkle';
+        var result = Array.from(str).sort().join("");
+        // 如果要降序排序
+        // var result = Array.from(str).sort().reverse().join("");
+        // console.log(result);
+
+        // 按照身份证生成对象的函数
+
+        // console.log(myfunction.getInFormPID(533629199802230067));
+
+        // 生成我们想要的格式的时间
+        // console.log(myfunction.getGoodTime(new Date()));
+
+        // 给一个用户的生日包含年份(年,月,日) ,计算该用户的年龄
+
+        // console.log(myfunction.getAge(2004,2,29));
+
+        // 根据传入的月份与日期计算出现在的时间记录生日还有几天
+
+        console.log(myfunction.getBrithbay(5,23));
+
+        // 根据系统的当前的月份,输出这个一个月的每一天的星期数
+
+        console.log(myfunction.printNowMonthDays());
+
+    </script>
+</body>
+</html>

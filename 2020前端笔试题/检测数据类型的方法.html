@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>检测数据类型的方法</title>
+</head>
+<body>
+    <script>
+        let a = { a:1 };
+        let b = [1,2,3];
+        // 第一种 typeof关键字    缺点： 只适合检查基本类型 且对null 显示object
+        // console.log(typeof null)
+        // console.log(typeof '123')
+        // console.log(typeof a)
+        // console.log(typeof b)
+
+        // // Object.prototype.toString.call(xx) - 最优
+        console.log(Object.prototype.toString.call(null))  // '[object Null]'
+        console.log(Object.prototype.toString.call('123')) // '[object String]''
+        console.log(Object.prototype.toString.call(a))     // '[object Object]'
+        console.log(Object.prototype.toString.call(b))     // '[object Array]'
+
+    </script>
+</body>
+</html>

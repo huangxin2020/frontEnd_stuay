@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>节流函数的实现</title>
+</head>
+<body>
+  <button class="btn">节流提交</button>
+  <script>
+      // 节流 - 节约流量的意思 每隔多少秒才能提交一次 减轻服务器压力与防抖一样
+      // 多次点击 -  节流只执行第一次点击
+      function  success() {
+        console.log('提交成功！')
+      }
+
+      // 节流函数 - throttle
+      const throttle = function (fn, delay) {
+        let flag = true;
+        return (...args) => {
+          if(!flag) return;
+          flag = false;
+          setTimeout(() => {
+            fn.apply(args);
+            flag = true;
+          }, delay)
+        }
+      };
+
+      const OnBtn = throttle(success, 2000);
+      let btn = document.getElementsByClassName('btn')[0];
+      btn.addEventListener('click',OnBtn);
+  </script>
+</body>
+</html>

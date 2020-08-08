@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组作业</title>
+</head>
+
+<body>
+    <script>
+        // 用户输入数组的长度，以及数组每一项的值，最后输出这个数组
+        /*  var len = +prompt('请输入数组的长度');
+         if (isNaN(len) || len < 0) {
+             console.log("输入错误，请重新输入！");
+         } else {
+             定义一个不定长度数组的方法
+             var arr = new Array(len);
+             for (var i = 0 ; i < arr.length; i++){
+                 arr[i] = prompt(`请输入第${i+1}项的值`);
+             }
+         }
+         console.log(arr); */
+
+        // 用户输入斐波那契数列的长度，在控制台上打印出来
+        // 斐波那契数列 前两位是1,第n位=第n-1位+第n-2位
+        // 1 1 2 3 4 8 13 ... ...
+        /* var len = +prompt("请输入斐波那契数列的长度");
+
+        var arr = new Array(len);
+        if (isNaN(len) || len < 0) {
+            console.log("输入错误，请重新输入！");
+        } else {
+            for (var i = 0; i < arr.length; i++) {
+                if (i < 2) {
+                    arr[i] = 1;
+                } else {
+                    arr[i] = arr[i-1] + arr[i-2];
+                }
+            }
+        }
+        console.log(arr); */
+
+        // 初始化一个5*5的二维数组,数组每一项是一个数字,计算对角线之和
+        // var arr = [
+        //     [1, 2, 5, 7, 8],
+        //     [2, 3, 5, 7, 9],
+        //     [1, 5, 7, 3, 8],
+        //     [10, 3, 5, 7, 4],
+        //     [8, 7, 6, 4, 2]
+        // ]
+
+        // var sum = 0;
+        // for(var i = 0 ; i < arr.length ; i++){
+            // 正对角线之和
+            /* for(var j = 0 ; j < arr[i].length ; j++){
+                if(i==j){
+                    sum += arr[i][j];
+                }
+            } */
+
+            // 反对角线之和
+        //     for(var j = 0 ; j < arr[i].length ; j++){
+        //        if ( i + j == arr[i].length - 1){
+        //            sum += arr[i][j];
+        //        }
+        //     }
+            
+        // }
+        // console.log(sum);
+
+        // 给一个数组/字符串也行,存放一些数字/字符,找出出现频率最高的数字/字符 - 重点 面试经常考到
+        var arr = [1,2,3,4,5,4,3,4,5,6,8,33,33,33,33,6,565,33,4,5,6,6];
+        // 保存记录的对象
+        var num = {};
+
+        for (var i = 0 ; i < arr.length ; i++){
+            var n = arr[i];
+            // 把数组的值作为属性名写入记录对象中
+            // 当属性名不存在时
+            // 对象[] 是在访问数据名  对象./对象[""] 是在访问属性的值
+            if(num[n]){
+                // 有++为一个表达式,这时会返回属性值
+                num[n]++;
+            }else{
+                num[n] = 1;
+            }
+        }
+        // 用于记录属性值即出现次数最多的属性名
+        // fq = frequency -> 频率
+        // for in 循环访问的是函数名
+        var result;
+        for(var porp in num){
+            if(!result || num[porp] > result.fq){
+                result = {
+                    number : porp,
+                    fq  :  num[porp]
+                }
+            }
+        }
+        console.log(`出现次数最多的是${result.number},出现的次数为${result.fq}`);
+
+    </script>
+</body>
+
+</html>

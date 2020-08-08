@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写斐波那契数列</title>
+</head>
+<body>
+    <script>
+        // 性能不佳但是最简单的方法 递归
+        function fib  (n) {
+            if (n <= 2) {
+                return 1;
+            } else {
+                return fib(n-1) + fib(n-2)
+            }
+        }
+        // 时间复杂度为O(n) 空间复杂度也为0(n) - 利用缓存 减少计算数量
+        // function fn(n) {
+        //     let cache = {
+        //         0: 0,
+        //         1: 1
+        //     }
+        //     return function _fn(n) {
+        //         return typeof cache[n] === 'number' ? cache[n] : 
+        //         cache[n] = _fn(n-1) + _fn(n-2)
+        //     } 
+        // } 
+
+        // 更加优化的的方法 利用for循环思想
+        // 时间复杂度为O(n) 空间复杂度O(1)
+        function fn(n) {
+            function _fn(n , curr , next) {
+                if(n === 0) {
+                    return curr
+                } else {
+                    return _fn(n-1, next , curr+next)
+                }
+            }
+            return _fn(n, 0, 1);
+        }
+        let start = new Date()
+        // let result = fn()(50) // 的第一种方法
+        let result = fn(50)
+        let end = new Date()
+
+        console.log(result, end.getTime() - start.getTime())
+    </script>
+</body>
+</html>

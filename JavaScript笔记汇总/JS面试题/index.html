@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>经典面试题目 - 与一些原理思想</title>
+</head>
+
+<body>
+    <script>
+        /* 回调函数：把函数b作为一个参数传入另一个函数a中，函数a在执行的时候，
+        可以使用函数b去执行(执行n次，可以传值，可以修改this) */
+        // 基于js自带的forEach方法，封装的自己的each方法
+        /* function each(arr,callBack){
+            for(let i = 0; i < arr.length; i++){
+                let flag = callBack.call(arr, arr[i], i);
+                // 接受回调函数返回的结果，如果是FALSE，就结束循环
+                if(flag === false){
+                    break;
+                }
+            }
+        } */
+
+        // 把一个字符串的大小写取反
+        let str = 'AaSbSdERsfr';
+
+        String.prototype.textRransform = function textRransform() {
+            let newStr = this.replace(/[a-zA-Z]/g, content => {
+                return content.toUpperCase() === content ? content.toLowerCase() : content.toUpperCase();
+            });
+            return newStr;
+        }
+
+        /* str = str.replace(/[a-zA-Z]/g, content => {
+            return content.toUpperCase() === content ? content.toLowerCase() : content.toUpperCase();
+        }) */
+
+        // let newStr = str.textRransform();
+        console.log(str.textRransform());
+        
+
+        let metaV = document.createElement('meta');
+        metaV.name = 'viewport';
+        metaV.content='width=device-width, initial-scale=1.0';
+        document.head.appendChild(metaV);
+    </script>
+</body>
+
+</html>

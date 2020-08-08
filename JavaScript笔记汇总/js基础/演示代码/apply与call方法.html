@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>apply与call方法</title>
+</head>
+<body>
+    <script>
+        function callme(a,b){
+            console.log(a,b);
+            console.log(this.name,this.age);
+        }
+
+        user1 = {
+            name:"小王",
+            age:22
+        }
+
+        user2 = {
+            name:"小李",
+            age:25
+        }
+
+        // 函数也有一个方法bind可以改变this的指向 bind绑定
+        var newcallme = callme.bind(user1,1,2);
+        newcallme();
+        // 此时this的指向是widnow
+        // callme(); 
+
+        // 通过apply后this指向user1
+        // callme.apply(user1,[1,2]);
+        // call与applu类似，都能改变this的指向
+        // callme.call(user2,1,2);
+
+
+        // 把伪数组转换为真数组
+        function test(){
+            console.log(arguments);
+            // 将伪数组arguments转换为真数组
+            var newArray =  [].slice.call(arguments);
+            console.log(newArray);
+        }
+
+        // test(23,45,6,78,35,6);
+    </script>
+</body>
+</html>

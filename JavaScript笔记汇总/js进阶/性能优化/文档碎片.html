@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="box">
+
+    </ul>
+
+    <script>
+        var box = document.querySelector('#box');
+        // 文档碎片
+        /* let frg = document.createDocumentFragment();
+        for(let i = 1 ; i < 6 ; i++){
+            let newLi = document.createElement('li');
+            newLi.innerHTML = i;
+            // 把创建的li放到文档碎片中
+            frg.appendChild(newLi);
+        }
+        // 然后一次性把内容放到容器中：只引发一次回流
+        box.appendChild(frg);
+        feg = null; */
+
+        // 性能更优的 模板字符串拼接
+        let str = ``;
+        for(let i = 1 ; i < 5 ; i++){
+            str += `<li>${i}</li>`;
+        }
+        box.innerHTML = str;
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>有效括号问题</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <script>
+       // 判断只包含括号的字符串中 是否是有效的括号
+       // 使其能达到 '()()' - true    '()())' - false
+       let str = '()(()';
+       // 方法一 ： 利用栈  遍历字符串 把所有的左括号入栈，遇到右括号出栈 然后通过栈的大小来判断
+       // 因为使用了栈结构 - 导致 算法的空间复杂度上为 O(n)
+       function isvalid (str) {
+           let stack = [];  // js中没有内置栈 - 用数组来模拟
+           for(let i = 0; i < str.length; i++) {
+               let n = str[i];
+               if (n === '(') {
+                   stack.push(n); // 遇到'('入栈
+               } else {
+                   if(stack.length === 0) {
+                       return false
+                   } else {
+                       stack.pop();
+                   }
+               }
+           }
+           return stack.length === 0 ? true : false; // 通过栈的长度来判断是否合格
+       }
+       // 优化方法 不使用栈结构 而是使用一个变量来代替栈结果的作用
+       // 空间复杂度变为了 O(1)
+       function BetterIsvalid (str) {
+           let sum = 0;
+           for (let i = 0; i < str.length; i++ ) {
+               let n = str[i];
+               if (n === '(') {
+                   sum ++;
+               } else {
+                   if ( sum === 0 ) {
+                       return false
+                   } else {
+                       sum -- ;
+                   }
+               }
+           }
+           return sum === 0 ? true : false;
+       }    
+       // console.log(isvalid(str))
+       console.log(BetterIsvalid(str));
+   </script>
+</body>
+</html>

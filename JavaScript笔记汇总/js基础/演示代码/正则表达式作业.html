@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 匹配一个手机号 11位数字 第一位一定为1
+        // ^1\d{10}$
+
+        // 姓名必须是3~6的中文
+        // ^[\u4e00-\u9fa5]{3,6}$
+
+        // 密码必须是6-12位的字符,只能包含数字,字母,下划线
+        // ^\w{6,12}$
+
+        // 匹配邮箱 xxxxx@xxxxx.xxx.xxx
+        // ^\w+@\w+(\.\w+){1,2}$
+
+        // 匹配一个座机号 xxx-xxxxxx 前1-3 后4-8
+        // ^\d{1,3}-\d{4,8}$
+
+        // 匹配一个正数
+        // ^\d+(\.\d+)?$
+
+        // 匹配一个小数
+        // ^-?\d+\.\d+$
+
+        // 匹配一个整数
+        // ^-?\d+(\.0+)?$
+
+        // 利用正则表达式把一个字符串单词的首字母变成大写
+
+        /* var str = 'hello world';
+        console.log(str); */
+        /* s = str.replace(/\b[a-z]/g,function(match){
+            return match.toUpperCase();
+        }); */
+
+        // 如果加上要去除掉空白字符，变成大驼峰命名法
+        // s = str.replace(/\s*\b[a-z]\s*/g, function (match) {
+        // return match.toUpperCase().trim()
+        // })
+        // console.log(s);
+
+        // 1. 书写一个正则表达式，去匹配一个字符串，得到匹配的次数、和匹配的结果
+        // var str = 'asde123fgr3252fdwgre';
+        // var reg = /\d{3}\D/g;
+
+        // exec方法返回的是一个数组，其中第一项为符合正则表达式的结果
+        // var n = 0;
+        // var s = '';
+        // while (result = reg.exec(str)) {
+        // n++;
+        // console.log(`符合匹配条件的是${result[0]}`);
+
+        //如果想要次数在上
+        // s+= result[0] + '\n'; 
+        // }
+        // s = `匹配了${n}次\n` + s;
+        // console.log(`匹配的次数是${n}`);
+        // console.log(s);
+
+        // 2. 得到一个字符串中中文字符的数量
+        /* var str = '物权法威风威ce风短期xa无法全额付cafew';
+        var reg = /[\u4e00-\u9fa5]/g;
+
+        var n = 0;
+        while(reg.test(str)){
+            n++;
+        }
+        console.log(`字符串中中文字符的数量为${n}`); */
+
+        // 3. 过滤敏感词，有一个敏感词组，需要将字符串中出现的敏感词替换为四个星号
+        /* var SensitiveWord = ['色情', '暴力', '费国伟', '卢本伟'];
+        function removeSensitiveWord(str, rep) {
+            var reg = new RegExp(`(${SensitiveWord.join('|')})+`, 'g');
+
+            return str.replace(reg, rep);
+        }
+
+        console.log(removeSensitiveWord("asdef色情dqdqwd而对方我暴力cef费国伟是猪啊cwefe卢本伟牛逼威锋网", "***")); */
+
+        // 4. 得到一个html字符串中出现的章节数量
+
+        /* var reg = /<h2>第\d+章<\/h2>/g;
+        var result = html.match(reg);
+        if(result){
+            console.log(result.length);
+        } */
+
+        // 捕获组
+        // var s = '1998-09-13,2012-10-23,2020-06-15';
+        // 得到每一个日期，并且得到它们的年月日
+        /* var reg = /(?<year>\d{4})-(\d{1,2})-(\d{1,2})/g;
+        while(result = reg.exec(s)){
+            // console.log(result[0],result[1],result[2],result[3]);
+            console.log (result);
+        } */
+
+        // 反向引用的举例说明 - 面试题
+
+        // var s = 'asadwda124dd334dwdwwd44dwdw213dewd233ffss';
+        // 找出字符串中重复出现的字符
+        // var reg = /(\w)\1+/g;
+
+        // while(result = reg.exec(s)){
+        //     console.log(result[1]);
+        // }
+
+
+        // 正向断言(预查) 详细代码举例
+        // 只是检测不会成为匹配结果与捕获组
+
+        /* var reg = /[a-zA-Z](?=\d+)/g;
+
+        while(result = reg.exec(s)){
+            console.log(result);
+        } */
+
+        // 面试题 - 很经典 把普通的数组变成123,456,789这种形式
+        /* var s = "123456789";
+        var reg = /\B(?=(\d{3})+$)/g;
+
+        s = s.replace(reg , ",");
+
+        console.log(s); */
+
+        // 判断密码强度 正向断言
+        // 要求密码中必须出现小写字母、大写字母、数字、特殊字符(!@#_,.);
+        var str = '233deWE.12d';
+        // .* 表示出现多个任意字符
+        var reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#_,.]).{6,12}$/;
+        var result = reg.test(str);
+        console.log(result);
+
+
+    </script>
+</body>
+
+</html>

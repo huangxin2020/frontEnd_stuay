@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三栏布局的实现</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .layout article div{
+      min-height: 200px;
+    }
+    section {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 假设高度已知， 写出三栏布局， 其中左栏、右栏宽度各为300px， 中间自适应 -->
+  <!-- 第一种方案 利用float浮动 -->
+  <section class="layout float">
+    <!-- 浮动解决方法 -->
+    <style>
+     .layout.float .left{
+       width: 200px;
+       float: left;
+       background: blue;
+     }
+     .layout.float .right {
+       width: 200px;
+       float: right;
+       background: red;
+     }
+     .layout.float .center {
+       background: #008c8c;
+     }
+     
+    </style>
+    <article class="outer">
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="center">
+        1.float方法
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+      </div>
+    </article>
+  </section>
+
+  <section class="layout absolute">
+    <style>
+      /* 绝对定位解决方案 */
+     .layout.absolute .outer>div{
+      position:absolute;
+     }
+     .layout.absolute .left {
+       left: 0;
+       width: 200px;
+       background: red;
+     }
+     .layout.absolute .center {
+       background: #008c8c;
+       left: 200px;
+       right: 200px;
+     }
+     .layout.absolute .right {
+       background: sandybrown;
+       right: 0;
+       width: 200px;
+     }
+     
+    </style>
+    <article class="outer">
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="center">
+        2. 绝对定位方法
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+      </div>
+    </article>
+  </section>
+
+  <section class="layout flexbox">
+    <style>
+      /* 利用flex布局解决问题 */
+      .layout.flexbox {
+        margin-top: 250px;
+      }
+     .layout.flexbox .outer{
+      display: flex;  /*父元素设置为flex*/
+     }
+     .layout.flexbox .left {
+       width: 200px;
+       background: red;
+     }
+     .layout.flexbox .center {
+       background: #008c8c;
+       flex: 1;
+     }
+     .layout.flexbox .right {
+       background: sandybrown;
+       width: 200px;
+     }
+     
+    </style>
+    <article class="outer">
+      <div class="left"></div>
+      <!-- 使用flex布局是 div的顺序也很重要 - center要在中间位置 -->
+      <div class="center">
+        3. flex布局方法
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+      </div>
+      <div class="right"></div>
+    </article>
+  </section>
+
+  <section class="layout table">
+    <style>
+      /* 利用table表格解决问题 */
+     .layout.table .outer{
+       width: 100%;
+       display: table;
+       height: 200px;
+     }
+     .layout.table .outer>div {
+       display: table-cell;
+     }
+     .layout.table .left {
+       width: 200px;
+       background: red;
+     }
+     .layout.table .center {
+       background: #008c8c;
+     }
+     .layout.table .right {
+       background: sandybrown;
+       width: 200px;
+     }
+     
+    </style>
+    <article class="outer">
+      <div class="left"></div>
+      <div class="center">
+        4. table表格布局方法
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+      </div>
+      <div class="right"></div>
+    </article>
+  </section>
+
+  <section class="layout grid">
+    <style>
+      /* 利用网格布局解决问题 */
+     .layout.grid .outer {
+       display: grid;
+       width: 100%;
+       grid-template-rows: 200px;
+       grid-template-columns: 200px auto 200px;
+     }
+     .layout.grid .left {
+       background: red;
+     }
+     .layout.grid .center {
+       background: #008c8c;
+     }
+     .layout.grid .right {
+       background: sandybrown;
+     }
+    </style>
+    <article class="outer">
+      <div class="left"></div>
+      <div class="center">
+        5. 使用网格布局方法
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+        中间内容部分中间内容部分中间内容部分
+      </div>
+      <div class="right"></div>
+    </article>
+  </section>
+
+  <!-- 
+    1. 上述几种方法的优缺点
+      - 浮动  优点：兼容性好   缺点：会是元素脱离文档流 需要做好与周围元素的清除浮动
+      - 绝对定位  优点：性能更好，能跟快的展示效果与js搭配   缺点：脱离了文档流，并且之后的元素也脱离了文档流，可用性差
+      - flex布局 优点：css3新增 解决之上两个布局方案的缺点 优先选用 缺点：兼容性优点浏览器可能会不支持
+      - table布局  优点：表格布局的兼容性很好  缺点：当三栏的其中一栏高度增加的时候，其余的也会跟着一起增加
+      - 网格grid布局  优点：新技术 能做多种方式的布局 且代码会很简洁 缺点：
+  -->
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>盒子模型的水平垂直居中</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    html,
+    body {
+      /* position: relative; */
+      height: 100%;
+      overflow: hidden;
+    }
+    .box {
+      width: 200px;
+      height: 200px;
+      text-align: center;
+      line-height: 200px;
+      border: 1px solid #008c8c;
+      font-size: 13px;
+      background-color: aquamarine;
+    }
+    /* 1 定位 子绝父相  缺点 - 居中的盒子必须要规定宽高 */
+    /* body {
+      position: relative;
+    }
+    .box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -100px;
+      margin-left: -100px;
+    } */
+    /* 2 定位 子绝父相 - 不需要子盒子的宽高 */
+    /* body {
+      position: relative;
+    }
+    .box {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    } */
+    /* 3 定位 子绝父相 - 利用css3的属性 缺点兼容性不是很好 */
+    /* body {
+      position: relative;
+    }
+    .box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    } */
+    /* 4 弹性布局 flex - 移动端常用 缺点 兼容性不好 */
+    /* body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    } */
+    /* 5 表格布局 table */
+    body {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      /* 父元素不能是百分比 */
+      width: 600px;
+      height: 600px;
+      border: 1px solid lawngreen;
+    }
+    .box {
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="box" id="box">
+    我是一个盒子
+  </div>
+  <!-- 6 js代码实现 -->
+  <!-- <script>
+    let body = document.body,
+        boxH = box.offsetHeight,
+        boxW = box.offsetWidth,
+        winH = body.clientHeight,
+        winW = body.clientWidth;
+
+    box.style.position = 'absolute';
+    box.style.left = (winW - boxW) / 2 + 'px';
+    box.style.top = (winH - boxH) / 2 + 'px';
+  </script> -->
+</body>
+</html>

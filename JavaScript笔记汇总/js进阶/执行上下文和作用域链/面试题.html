@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* var food = 'rice';
+        var eat = function(){
+            console.log(`eat ${food}`);
+        };
+        (function () {
+            var food = 'noodle';
+            eat();
+        })(); */
+
+        // 面试题 解决闭包问题
+        /* for(var i = 0 ; i < 10 ; i++){
+            setTimeout(function(){
+                console.log(i);
+            },1000)
+        }
+
+        for(var i = 0 ; i < 3 ; i++){
+            (function (i){
+                setTimeout(function (){
+                    console.log(i);
+                },1000)
+            }(i));
+        } */
+ 
+        var foo = {n : 1};
+        (function (foo){
+            console.log(foo.n);
+            foo.n = 3;
+            // 因为foo以有值 所有该赋值操作没有覆盖 而是忽略
+            var foo = { n : 2 };
+            console.log(foo.n);
+        })(foo);
+        console.log(foo.n);
+    </script>
+</body>
+</html>

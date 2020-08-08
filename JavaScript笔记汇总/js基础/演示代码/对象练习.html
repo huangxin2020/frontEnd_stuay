@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var item = {
+            name : 'foo',
+            parent : {
+                name : 'bar'
+            },
+            child : {
+                name : 'goo'
+            }
+        } ;
+
+        // 交换item中的parent与child 不可创建新的对象
+
+        var a = item.parent;
+
+        item.parent = item.child;
+
+        item.child = a;
+
+        console.log(item.parent.name , item.child.name);
+    </script>
+</body>
+</html>

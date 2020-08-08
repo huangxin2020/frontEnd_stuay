@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>call-apply-bind的问题</title>
+</head>
+
+<body>
+  <script>
+    // call与apply、bind的相关面试题汇总
+    // 1. call与apply的区别？哪个性能更好    
+    /*
+      1. call与apply都是用于改变this指向的方法，他们都是function.prototype上的方法
+      2. call是在改变this指向之后，会把参数一个一个的放入改变this指向之后的函数中指行
+      3. apply是在改变了this的指向之后，把参数放在数组中参入函数执行
+      4. bind同意是会改变this的指向，但是它不会自己执行函数
+      5. 在性能上来说，call的性能要比apply好一点，(特别是在传递的参数大于三个时)
+    */
+    function fn(...arg) {
+      console.log(this);
+      console.log(arg)
+    }
+
+    let obj = {
+      age: '小明'
+    }
+
+    //  fn.call(obj,12,13,14)
+    //  fn.apply(obj,[12,13,14])
+    // fn.bind(obj)()
+
+    // 手写实现call方法
+    Function.prototype.newCall = function (context) {
+      // 1 判断context是否为object，如果是object就代表可能是Object 或者 null，如果不是就赋值一个空对象
+      if (typeof context === 'object') {
+        context = context || window //  context 如果是null就会赋值为window
+      } else {
+        context = Object.create(null)
+      }
+
+      // 2 在context下挂载一个函数，函数所在的key随机生成，防止context上已有同名key
+      var fn = +new Date() + '' + Math.random() // 用时间戳+随机数拼接成一个随机字符串作为一个新的key
+      context[fn] = this
+      // 3 newCall如果还有其他的参数传入也要考虑用到
+      var args = []
+      for (var i = 1; i < arguments.length; i++) {
+        args.push('arguments[' + i + ']')
+      }
+      // 4 重点在这里，执行context[fn]这个函数，只能用eval，因为newCall的入参参数不确定
+      var result = eval('context[fn](' + args + ')') // args是一个数组，但是当它和字符串相加时自动调用内部的toString方法转成字符串
+
+      delete context[fn] // 用完后从context上删除这个函数
+      // 5 返回结果
+      return result
+    }
+    // fn.newCall(obj,12,13,14);
+
+    // 手写实现apply
+    // 优化版：入参加个array
+    Function.prototype.newApply = function (context, array) {
+      if (typeof context === 'object') {
+        context = context || window
+      } else {
+        context = Object.create(null)
+      }
+
+      var fn = +new Date() + '' + Math.random()
+      context[fn] = this
+
+
+      var args = null
+      if (array) {
+        args = []
+        // 这里不需要argument
+        for (var i = 0; i < array.length; i++) {
+          args.push('array[' + i + ']')
+        }
+      }
+      var result = eval('context[fn](' + args + ')')
+
+      delete context[fn]
+      return result
+    }
+    // 用法：
+    var fn = function (a, b) {
+      console.log(this.name, a, b)
+    }
+    var context = {
+      name: 'name'
+    }
+    // 打印 => 'name a b'
+    // fn.newApply(context, ['a', 'b'])
+
+    // 手写实现bind
+    Function.prototype.newBind = function (context) {
+      if (typeof context === 'object') {
+        context = context || window
+      } else {
+        context = Object.create(null)
+      }
+
+      var args = []
+      for (var i = 1; i < arguments.length; i++) {
+        args.push(arguments[i])
+      }
+
+      var fn = +new Date() + '' + Math.random()
+      context[fn] = this
+
+      // 重点这里包个function形成闭包
+      return function () {
+        var result = eval('context[fn](' + args + ')')
+        delete context[fn]
+        return result
+      }
+    }
+
+    // 或者 newBind1
+    Function.prototype.newBind1 = function (context) {
+      var args = []
+      for (var i = 1; i < arguments.length; i++) {
+        args.push(arguments[i])
+      }
+
+      return function () {
+        Function.prototype.newApply(context, args)
+      }
+    }
+
+    // 或者 newBind2
+    Function.prototype.newBind2 = function (context) {
+      var args = []
+      for (var i = 1; i < arguments.length; i++) {
+        args.push(arguments[i])
+      }
+
+      return function () {
+        eval('Function.prototype.newCall(context, ' + args + ')')
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原生js实现ajax</title>
+</head>
+<body>
+  <script>
+    // 原生js实现ajax的5个步骤 - 代码
+    /* 
+    原理上创建一个ajax请求
+    步骤：
+    1. 创建一个XMLHttpRequest实例
+    2. 发出http请求
+    3. 接收服务器传回来的数据
+    4. 更新页面上的数据
+    */
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) { // readyState有五个参数 0,1,2,3,4 
+        if (xhr.status === 200) {
+          // 状态码 status
+          console.log(xhr.responseText);
+        } else {
+          console.log(xhr.statusText)
+        }
+      }
+    }
+    xhr.onerror = function () {
+      console.error(xhr.statusText);
+    };
+    xhr.open('GET', url, true);
+    xhr.send(null);
+
+    /*
+    xhr.readyState 的四个参数的含义
+    0：表示XMLHttpRequest的实例已经生成了 但是open里的方法（get或者post还没有调用）
+    1：表示XMLHttpRequest的实例已经生成了 open里的方法已经调用 但是实例的send方法还没有调用
+    2：XMLHttpRequest的实例已经生成了 open，send方法都已调用 ，服务器返回的头信息与状态码都已经收到了，
+    但是数据体还没有接收到。
+    3：表示正在接收服务器返回的数据体 body还没有结束完成
+    4：表示服务器返回的数据体都已经接收完毕
+    */
+
+    /*
+    服务器返回的状态码 常见的类型
+    200  服务器正常
+
+    301  永久移动
+    302  暂时移动
+    304  未修改
+    307  暂时重定向
+
+    401  未授权
+    403  禁止访问
+    404  未发现指定网址
+
+    500  服务器错误
+    */
+  </script>
+</body>
+</html>

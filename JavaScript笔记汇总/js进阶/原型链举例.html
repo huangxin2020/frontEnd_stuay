@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 所有的对象都是由object构造器参生的
+        // 普通对象 通过new 函数来产生
+        /* function test(){
+            return {};
+        }
+
+        new test(); */
+        // 产生的对象是构造函数是什么
+        // console.log(new test()); 
+        // test返回的是个空对象 空的对象由object产生 如果函数里什么都没返回 构造函数就是test()
+
+        // 方法可以写在构造函数的原型上，所有有此构造函数产生的对象都能使用
+        // 给String构造函数 加上一个大驼峰命名法
+        String.prototype.camel = function(){
+            return this.replace(/\b(\w)(\w*)\b/g, function($, $1 , $2){
+                return $1.toUpperCase() + $2;
+            }).replace(/\s/g, '');
+        }
+        //  \s来找到所有空白字符 用空字符串来代替
+
+    </script>
+</body>
+</html>

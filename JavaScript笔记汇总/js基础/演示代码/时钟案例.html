@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .clockBox{
+            width: 520px;
+            height: 42px;
+            box-sizing: border-box;
+            position: absolute;
+            padding: 0 15px;
+            font-size: 2em;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            color: darkred;
+            /* 设置背景渐变色 */
+            background: lightblue;
+            background: -webkit-linear-gradient(top left, lightblue,lightcoral,lightcyan);
+        }
+    </style>
+</head>
+<body>
+    <div class="clockBox">
+    </div>
+
+    <script>
+        let clockBox = document.querySelector('div.clockBox');
+        // 定时器
+        setInterval(() => {
+            getTime();
+        }, 1000);
+        // 封装一个获取当期日期 并把日期转化为想要格式的函数
+        function getTime(){
+            let time = new Date(),
+                year = time.getFullYear(),
+                month = time.getMonth() + 1,
+                day = time.getDate(),
+                week = time.getDay(),
+                hours = time.getHours(),
+                minutes = time.getMinutes(),
+                seconds = time.getSeconds();
+
+            // 拼接成我们想要的字符串
+            let yearTime = `${year}年${month.toString().padStart(2,'0')}月${day.toString().padStart(2,'0')}日`,
+                weekAry = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+                weekTime = weekAry[week] + ' ',
+                dateTime =  `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+            let result = yearTime + ' '+ weekTime + dateTime; 
+            clockBox.innerHTML = result;
+        }
+
+    </script>
+</body>
+</html>

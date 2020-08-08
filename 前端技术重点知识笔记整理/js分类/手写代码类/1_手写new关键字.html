@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>手写实现new操作符</title>
+</head>
+
+<body>
+  <!-- new关键字的作用 - 实例化一个构造函数产生一个继承了构造函数属性的实例 -->
+  <script>
+    // 构造函数
+    function Foo(name, age) {
+      this.name = name;
+      this.age = age
+      this.sayHi = function () {
+        console.log('sayHi!!')
+      }
+    }
+    
+    // 实现_new关键字
+    function _new() {
+      // 1. 创建一个空对象
+      let obj = {};
+      // 2. 获取传入的第一个参数 利用argumrnts获取 但是只要先把它转换成数组
+      let fn = [].shift.call(arguments);
+      // 3. 把创建的对象的隐式原型指向第一个参数的原型
+      obj.__proto__ = fn.prototype;
+      // 4. 第一个构造函数(第一参数)的this指向创建的对象 并把后面传入的参数作为参数参数构造函数
+      // 利用构造函数创建对象
+      let _arguments = Array.prototype.slice.call(arguments);
+      const ret = fn.apply(obj, _arguments);
+      // 5. 放回创建的对象 判断构造函数中的返回值是不是对象
+      return typeof ret === 'object' ? ret : obj;
+    }
+
+    // function _new (fn) {
+    //     // 判断是否有原型对象，有就作为原型对象
+    //     let proto = Object(fn.prototype) === fn.prototype ? 
+    //     fn.prototype : Object.prototype;
+    //     // 利用原型创建new 对象
+    //     let obj = Object.create(proto);
+    //     // 把obj当做fn的this调用，并解析去除fn在arguments里面的位置，剩余的传进去
+    //     let res = fn.apply(obj, Array.prototype.slice.call(arguments, 1));
+    //     // 判断返回的是否是对象
+    //     if(Object(res) === res) {
+    //         // 如果是对象则返回经过处理的res
+    //         return res;
+    //     }
+    //     // 不是对象返回obj
+    //     return obj;
+    // }
+
+    let foo = _new(Foo, 'json', 20);
+    console.log(foo);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Array构造函数</title>
+</head>
+
+<body>
+    <script>
+        /* var arr = [23,45,67,3,5,899,9];
+
+        arr.forEach(function(item , i){
+            console.log(item,i);
+        }); */
+
+        // 链式编程：每一个函数调用返回的类型一致
+        // var arr = [22,45,57,21,75,36,78,90];
+
+        // 先对数组进行随机排序
+        // 只取其中合格的分数
+        // 得到学生对象的数组（每个学生对象包含名字和分数）
+
+        /* var newArr = arr.sort(function(){
+            return Math.random() - 0.5;
+        }).filter(function(item){
+            return item >= 60;
+        }).map(function(item,i){
+            return {
+                name : `学生${i+1}`,
+                score : item
+            }
+        })
+
+        console.log(newArr); */
+
+        // 作业
+        var arr = [1, 2, 3, 4, 5, 6, -1, -2, -3, -4, -5, -6];
+        // 要求：去掉数组中的负数，然后对每一项平方，然后再对每一项翻倍(*2)，然后求和
+        // 不许使用循环
+
+        var newArr = arr.filter(function (item) {
+            return item >= 0
+        }).map(function (item) {
+            return item * item;
+        }).map(function(item){
+            return item * 2;
+        }).reduce(function(sum,item){
+            return sum += item
+        },0)
+        console.log(newArr);
+    </script>
+</body>
+
+</html>

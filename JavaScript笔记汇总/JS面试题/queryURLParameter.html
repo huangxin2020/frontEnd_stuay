@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>获取一个URL地址问号后面传递的参数信息</title>
+</head>
+<body>
+    <script>
+        // let url = 'http://www.zhufengpeixun.cn/index.html?lx=1&name=zhufeng&teacher=aaa#box';
+        // 要获取的信息 
+        /*
+          结果:{
+              lx : 1,
+              name : 'zhufeng',
+              teacher : 'aaa',
+              HASH : 'box'
+          }
+        */
+
+        // 简陋处理版 1.把url字符串以？和#分隔为三部分
+       /*  let askIndex = url.indexOf('?'),
+            welIndex = url.indexOf('#'),
+            askText = url.substring(askIndex+1,welIndex),
+            welText = url.substr(welIndex);
+        // 2.对分隔的部分细分
+        let result = {},
+            askAry = askText.split("&");
+        askAry.forEach(item => {
+            let n = item.split('='),
+                key = n[0],
+                vaule = n[1];
+            result[key] = vaule;
+        });
+        result['HASH'] = welText;
+        console.log(result); */
+        
+        let url = 'http://www.zhufengpeixun.cn/index.html?lx=1&name=zhufeng&teacher=aaa#box';
+        // 封装一个函数
+
+        /**
+         * 用于获取url地址中？后面的信息对象
+         * @params 传入一个url地址
+         * @return 返回一个包含信息的对象
+         * by my 2019-9-22
+        */ 
+        function getURLInfo(url){
+            // 获取？和#后面的信息
+            let askIn = url.indexOf('?'),
+                welIn = url.indexOf('#'),
+                askText = '',
+                welText = '';
+            // 判断 #不存在  null表示什么都不做
+            welIn === -1 ? welIn = url.length : null;
+            // 判断 ? 存在
+            askIn >= 0 ? askText = url.substring(askIn+1,welIn) : null;
+            // 得到#后面的
+            welText = url.substring(welIn + 1);
+            // 处理分隔的部分
+            let result = {};
+            welText !== '' ? result['HASH'] = welText : null;
+            if(askText !== ''){
+                let ary = askText.split('&');
+                ary.forEach(item => {
+                    let itemAry = item.split('=');
+                    result[itemAry[0]] = itemAry[1]; 
+                })
+            }
+            return result;
+        };
+
+
+        // 用正则表达式
+        function newGetURLInfo(url){
+            let result = {},
+                reg1 = /([^?#&=]+)=([^?#&=]+)/g,
+                reg2 = /#([^?#&=]+)/g;
+            url.replace(reg1, (n , x , y) => result[x] = y);
+            url.replace(reg2,(n , x) => result['HASH'] = x);
+            return result;
+        };
+        console.log(newGetURLInfo(url));
+    </script>
+</body>
+</html>

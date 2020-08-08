@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 累计 把1~100的所有质数累加 除1之外只能被1与自身整除的数
+        var sumsum = 0,
+            coust = 0;
+        // coust记录整除的个数
+        for (var i = 2; i <= 100; i++) { // 因为1肯定不是质数
+            for (var j = 1; j <= i; j++) {
+                if (i % j == 0) {
+                    coust++
+                }
+            }
+            if (coust == 2) {
+                sumsum += i;
+                // console.log(`0到100的质数有：${i}`);        
+            }
+            // 每次新的数开始计算被整除的个数时都要置零 把前一个数的被整除个数重置掉
+            coust = 0;
+        }
+        // console.log(sumsum);
+
+        // 求质数累加的写法二
+        var sum = 0;
+        for (var i = 0; i <= 100; i++) {
+            var isFind = false;
+            // 素数只能被1与自身整除，那么如果在2到自身之间找到这个数被整除的数，那么他就不是素数
+            for (var j = 2; j <= i - 1; j++) {
+                if (i % j == 0) {
+                    isFind = true;
+                    break;
+                }
+            }
+
+            if (i > 1 && isFind != true) {
+                // console.log(`0到100之间的质数有：${i}`);
+                sum += i;
+            }
+
+        }
+        // console.log(`0到100之间的质数的和为：${sum}`)
+
+
+        // 累计 计算 1~100中奇数的和
+        // var sum = 0;
+        for (var i = 0; i <= 10; i++) {
+            if (i % 2 != 0) {
+                sum += i;
+            }
+        }
+
+        // console.log(sum)
+
+        //  输出一个3行5列的*号
+        /*  var x = 3,
+             y = 5;
+         for(var i = 0 ; i < x ; i++){
+             for(var j = 0 ; j < y ; j++){
+                 document.write('*');
+             }
+             document.write('<br>');
+         } */
+
+        // 用*号输出一个5行的直角三角形
+        /*
+        *
+        **
+        ***
+        ****
+        ***** 
+        */
+
+        var line = 5;
+        for (var i = 1; i <= line; i++) {
+            /* for(var j = 1 ; j <= i ; j++){
+                document.write('*');
+            }
+            document.write('<br>'); */
+
+            // 在控制台显示
+            var str = '';
+            for (var j = 1; j <= i; j++) {
+                str += '*';
+            }
+            // console.log(str);
+        }
+
+        // 用*号输出一个5行的等腰三角形
+        /*
+            *
+           ***
+          *****
+         *******
+        ********* 
+        */
+        /* var line1 = 5;
+        for(var i = 1 ; i <= line1  ; i++){
+            for(var j = line1 ; j > i ; j--){
+                document.write('&nbsp;');
+            }
+            for(var k = 0 ; k < 2*i-1 ; k++){
+                document.write('*');
+            }
+            document.writeln('<br>')
+        } */
+
+        // 输出9*9乘法表
+        for (var i = 1; i <= 9; i++) {
+            var str = '';
+            for (var j = 1; j <= i; j++) {
+                str += `${i}*${j}=${i * j}\t`;
+            }
+            // console.log(str);
+        }
+    </script>
+</body>
+
+</html>

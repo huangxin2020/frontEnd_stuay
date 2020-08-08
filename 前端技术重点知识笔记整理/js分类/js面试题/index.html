@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>关于js的笔试题</title>
+</head>
+<body>
+    <script>
+        // 给一个字符串输出 改变这个字符串中每个英文字母的大小写
+        /* let str = 'hahahaAAAA你好啊 *hello NICE';
+        String.prototype.Change = function Change(){
+            let newStr = this.replace(/[a-zA-Z]/g, item => {
+                return item.toUpperCase() === item ? item.toLowerCase() : item.toUpperCase();
+            });
+            return newStr;
+        } */
+
+        // 实现一个字符串匹配算法，从字符串s中，查找是否存在字符t，若存在返回所在位置索引，不存在返回-1.(不能基于indexOf)
+        // 给原型链上添加方法的写法
+        ~function(){
+            let myIndexOf = function(T){
+                /* let lenT = T.length,
+                    lenS = this.length,
+                    res = -1;
+                if(lenT > lenS){
+                    return res;
+                }
+                for(let i = 0; i <= lenS - lenT ; i++){
+                    if(this.substr(i,lenT) === T){
+                        res = i;
+                        break;
+                    }
+                }
+                return res; */
+
+                // 利用正则
+                let reg = new RegExp(T);
+                    res = reg.exec(this);
+                return res === null ? -1 : res.index;
+            };
+            String.prototype.myIndexOf = myIndexOf;
+        }();
+
+        let S = "haohaoxxuexitiantianxiangshang",
+            t = 'tian';
+        console.log(S.myIndexOf(t));
+
+        // 使用正则来匹配一个网址验证其是否正确
+        let str = 'http://www.baidu.com/index.html?lx=1&from=wx#video';
+        let reg = /^((http|https|ftp):\/\/)?(([\w-]+\.)+[a-z0-9]+)((\/[^/]*)+)?(\?[^#]+)?(#.+)?$/i;
+        console.log(reg.exec(str));
+        // URL格式：
+        /*
+        1. 协议名:// http/https/ftp
+        2. 域名
+        www.baidu.com
+        baidu.com
+        kbs.sports.qq.com
+        kbs.sports.qq.com.cn
+        3. 请求路径
+        /
+        /index.html
+        /stu/index.html
+        /stu/
+        4. 问号传参
+        ?xxx=xxx&xxx=xxx
+        5. 哈希值
+        #xxx
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>剪刀石头布小游戏</title>
+</head>
+<body>
+    <script>
+        var feat = prompt("请输入剪刀、石头、布");
+        if(feat === '剪刀' || feat === '石头' || feat === '布'){
+            // 让计算机随机出拳
+            var pcfeat,
+                mathPcFeat;
+            mathPcFeat = Math.random();
+            if(mathPcFeat < 0.333){
+                pcfeat = '剪刀';
+            }else if(mathPcFeat < 0.666){
+                pcfeat = '石头';
+            }else{
+                pcfeat = '布';
+            }
+
+            // 判断胜负
+            console.log(`你的出拳为${feat}, 计算机的出拳为${pcfeat}`);
+            if ( feat === '剪刀' && pcfeat === '布' ||
+            feat === '石头' && pcfeat === '剪刀' ||
+            feat === '布' && pcfeat === '石头'){
+                console.log('恭喜你，胜利了！');
+            }else if(feat === pcfeat){
+                console.log('平局！');
+            }else{
+                console.log('很遗憾，计算机胜利！');
+            }
+        }else{
+            console.logP('输入错误，请重新输入');
+        }
+    </script>
+</body>
+</html>

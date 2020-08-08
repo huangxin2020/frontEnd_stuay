@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对于有效括号字符串长度的判断</title>
+</head>
+<body>
+  <script>
+    // 最长有效匹配括号长度 leetCode32
+    // '(()' - 2   ')()()' - 4  '()(())' - 6
+    // 方法一 ： 暴力法 - 利用嵌套循环来形成
+    let str = '()(())';
+    function longIsValid (str) {
+      let max = 0; // 保存最大长度
+      if(str.length === 0 || str.length === 1) return max;  // 没有有效括号
+
+      var stack = []; // 利用数组模拟栈
+
+      // 嵌套循环体系 - 对符合配体的字符数进行记录 循环进行比对
+      for (let i = 0 ; i < str.length; i++) {
+        let tmpMax = 0; // 记录当前括号位的位置  0表示从第一位开始 - 用于记录有效长度
+        for (let j = i; j < str.length; j++) {  // j = i 表示比较从第一位就开始进行比对
+          // 进行判断 
+          if( str[j] === "(" ) {
+            stack.push('('); // 入栈
+            tmpMax++;
+          } 
+          else { // str[j] === ')' 时
+            if (stack.length == 0) {
+              // 栈空, 表示当前位置的括号有效匹配结束了
+              max = max > tmpMax ? max : tmpMax;
+              break;
+            } else {
+              stack.pop();  // 出栈
+              tmpMax ++;
+            }
+          }
+        }
+        if (stack.length == 0) {
+          max = max > tmpMax ? max : tmpMax;
+        }
+
+        stack = []; // 清空栈内存
+      }
+      return max;
+    }
+
+    // 暴力法中因为使用了两个个for循环 - 导致时间复杂度为 O(n)
+
+    // 对上述的方法 进行优化 - 使其时间复杂度降为 O(n)
+    // 使用下标法 - 利用下标来进行记录有效括号的匹配
+    function longIsValid1 (str) {
+      let max = 0; // 记录匹配的结果
+      // 对传入的字符串进行下判断
+      if (str.length === 0 || str.length === 1) return max;
+
+      let stack = [-1]; // 利用这个下标值 利用栈来解决 - 解决循环嵌套
+      for( let i = 0; i < str.length; i++) {
+        if(str[i] === '(') {
+          stack.push(i);  // 把下标入栈
+        } else {
+          stack.pop();
+          if (stack.length < 1) { // 表示栈顶元素没有了 之前的匹配结束了 
+            // 对后面的字符串重新开始  回复初始状态
+            stack.push(i);
+          } else {
+            // 有效的括号匹配
+            max = Math.max(max, i - stack[stack.length - 1]);
+          }
+        }
+      }
+      return max
+    }
+    // 再优化 - 时间复杂度因为肯定是需要对字符串进行一次遍历的 不太可能还可以优化
+    // 所以优化只能在 空间复杂度上思考 因为使用了栈 导致空间复杂度为O(n)  - 使用变量来代替
+    function longIsValid2 (str) {
+      let left = right = max = 0; // left -> '('  right -> ')'  两个变量代替栈
+      if (str.length === 1 || str.length === 0) return max;
+      for (let i = 0 ; i < str.length ; i++) {
+        if(str[i] === '(') {
+          left ++ ; // 表示左边的括号数
+        } else {
+          right ++; // 表示右边括号数
+        }
+
+        if(left == right) {
+          max = Math.max(max, 2*right); // 2*right 即表示最终匹配长度
+        } else if (right > left) { // 后面匹配无效
+          left = right = 0; // 重新开始匹配
+        }
+      }
+      left = right = 0; 
+      // 还需要逆循环一次 保证匹配的结果
+      for (let i = str.length - 1 ; i >= 0; i--) {
+        if (str[i] === '(') {
+          left ++;
+        } else {
+          right ++
+        }
+        if(left == right) {
+          max = Math.max(max, 2*left);
+        } else if (left > right) {
+          left = right = 0;
+        }
+      }
+      return max;
+    }
+
+    console.log(longIsValid(str));
+    console.log(longIsValid1(str));
+    console.log(longIsValid2(str));
+    console.log(longIsValid(')()()'));
+    console.log(longIsValid1(')()()'));
+    console.log(longIsValid2(')()()'));
+    console.log(longIsValid('()(()'));
+    console.log(longIsValid1('()(()'));
+    console.log(longIsValid2('()(()'));
+    console.log(longIsValid2('((())()'));
+  </script>
+</body>
+</html>

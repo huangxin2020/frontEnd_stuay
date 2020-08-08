@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组作业-冒泡排序</title>
+</head>
+
+<body>
+    <script>
+        var arr = [3, 6, 2, 1, 4, 33, 21, 15, 64, 34];
+        var num;
+        // 冒泡排序的思想 比较相邻的元素,如第一个比第二个大就交换它们
+        // num 用于交换的媒介
+        // 升序
+        for (var i = 0; i < arr.length - 1; i++) {
+            for (var j = 0; j < arr.length - i; j++) {
+                if(arr[j] > arr[j+1]){
+                    num = arr[j+1];
+                    arr[j+1] = arr[j];
+                    arr[j] = num;
+                }
+            }
+        }
+        console.log(arr);
+    </script>
+</body>
+
+</html>

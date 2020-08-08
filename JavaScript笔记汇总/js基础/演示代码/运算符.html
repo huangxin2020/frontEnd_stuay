@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 对象属性值的简便输出方式
+
+        var user = {
+            name : '小王',
+            age : 20,
+            sex : '男',
+        }
+
+        // 常规的输出放方式为 
+        /* console.log("我的名字叫：" + user.name + ",今年" + user.age + '岁了，性别为'
+        + user.sex + '，今年我' + (user.age >= 18 ? '已成年' : '未成年') ); */
+
+        // 简便的输出方式 - 模板字符串
+        // `` 符号会保存文本格式，换行、空格都会在页面上显示出来
+        console.log(`我的名字叫：${user.name},今年${user.age},性别为${user.sex},今年我${user.age >= 18 ? '已成年' : 'w未成年'}`);
+    </script>
+</body>
+</html>

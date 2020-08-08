@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <script>
+        /*navigator 导航*/
+        //geolocation: 地理定位
+//        window.navigator.geolocation
+//        兼容处理
+        if(navigator.geolocation){
+//       如果支持，获取用户地理信息
+
+//            successCallback 当获取用户位置成功的回调函数
+//            errorCallback 当获取用户位置失败的回调函数
+
+            navigator.geolocation.getCurrentPosition(successCallback,errorCallback);
+
+        }else{
+            console.log('sorry,你的浏览器不支持地理定位');
+        }
+        // 获取地理位置成功的回调函数
+        function successCallback(position){
+//            获取用户当前的经纬度
+//            coords坐标
+//            纬度latitude
+            var wd=position.coords.latitude;
+//            经度longitude
+            var jd=position.coords.longitude;
+
+            console.log("获取用户位置成功！");
+            console.log(wd+'----------------'+jd);
+//          40.05867366972477----------------116.33668634275229
+
+//            谷歌地图：40.0601398850,116.3434224706
+//            百度地图：40.0658210000,116.3500430000
+//            腾讯高德：40.0601486487,116.3434373643
+        }
+        // 获取地理位置失败的回调函数
+        function errorCallback(error){
+            console.log(error);
+            console.log('获取用户位置失败！')
+        }
+    </script>
+</body>
+</html>
