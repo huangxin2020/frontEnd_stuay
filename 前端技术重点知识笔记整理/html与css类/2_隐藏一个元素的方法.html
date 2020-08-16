@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_隐藏一个元素的方法比较</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #008c8c;
+        }
+
+        /* 隐藏一个元素的方法 */
+        /* 方法一：display : none */
+        /* 
+           1. DOM结构：浏览器不会渲染display属性为none的元素，不占据空间；
+           2. 事件监听：无法进行DOM事件监听(无法使用点击点事件机制)
+           3. 性能：动态改变此属性时会引发重拍(重新生成DOM树)，性能很差
+           4. 继承：不会被子元素继承，毕竟子元素也不会被渲染出来
+           5. transition：transition不支持display 
+        */
+        /* #box {
+            display: none;
+        } */
+
+        /* 方法二：visibility: hidden */
+        /*
+           1. DOM结构：元素被隐藏，但是会被渲染不会消失(在浏览器中ELEMENTS中会显示)，占据空间
+           2. 事件监听：无法进行DOM事件监听
+           3. 性能：动态改变此属性时会引起重绘(重新生成渲染树)，性能比起上一方法较高
+           4. 继承：会被子元素继承，子元素可以通过设置visibility：visible来取消隐藏效果
+           5. transition：visibility会立即显示，隐藏时会延时
+        */
+        /* #box {
+            visibility: hidden;
+        } */
+
+        /* 方法三：opacity : 0 */
+        /*
+           1. DOM结构：透明度为100%，元素隐藏，占据空间；
+           2. 事件监听：可以进行事件的监听
+           3. 性能：提升为合成层，不会触发重绘，性能较高
+           4. 继承：会被子元素继承且子元素并不能通过opacity:1 来取消隐藏
+           5. transition: opacity可以延时显示与隐藏 
+        */
+        /* #box {
+            opacity: 0;
+        } */
+    </style>
+</head>
+<body>
+    <div id="box" onclick="ClickEVent(event)">
+        啦啦啦啦啦,我是一个元素啊
+    </div>
+
+    <script>
+        function ClickEVent(e) {
+            console.log(e)
+        }
+    </script>
+</body>
+</html>

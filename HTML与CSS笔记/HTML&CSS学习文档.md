@@ -1484,6 +1484,8 @@ BFC渲染区域
 
 - overflow不等于visible的块盒 (默认值为visible)
 
+- display为inline-block、table-cells、flex
+
 不同的BFC区域，它们进行渲染的时候互不干扰
 
 创建了BFC的元素，隔绝了它内部和外部的联系，内部的渲染不会影响到外部
